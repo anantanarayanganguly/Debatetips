@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>School Debate: Tips & Tricks (4‑Speaker Team)</title>
+  <style>
+    :root{
+      --bg:#0f172a; /* slate-900 */
+      --card:#111827ee; /* gray-900 */
+      --text:#e5e7eb; /* gray-200 */
+      --muted:#94a3b8; /* slate-400 */
+      --accent:#22d3ee; /* cyan-400 */
+      --accent2:#34d399; /* emerald-400 */
+      --warn:#f59e0b;/* amber */
+      --bad:#ef4444;/* red */
+      --good:#10b981;/* green */
+      --ring:#60a5fa; /* blue-400 */
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";background:linear-gradient(120deg,#0b1222,#111827 40%,#0b1222);color:var(--text)}
+    a{color:var(--accent)}
+    .container{max-width:1200px;margin:auto;padding:24px}
+    header{position:sticky;top:0;background:rgba(2,6,23,.7);backdrop-filter:blur(6px);border-bottom:1px solid #1f2937;z-index:50}
+    .brand{display:flex;align-items:center;gap:12px;padding:12px 0}
+    .logo{width:44px;height:44px;border-radius:12px;background:radial-gradient(circle at 30% 30%,#22d3ee,#0ea5e9 40%,#1e3a8a 70%);display:grid;place-items:center;box-shadow:0 8px 24px #00000066}
+    .logo svg{filter:drop-shadow(0 2px 6px #000a)}
+    .title{font-size:1.35rem;font-weight:700}
+    .muted{color:var(--muted)}
+
+    nav{display:flex;gap:8px;flex-wrap:wrap;padding:12px 0 18px}
+    .btn{appearance:none;border:none;cursor:pointer;padding:10px 14px;border-radius:12px;background:#0b1222;color:var(--text);
+         border:1px solid #1f2937;transition:transform .08s ease, box-shadow .2s ease, background .2s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px #0007;background:#111827}
+    .btn:active{transform:translateY(0)}
+    .btn.primary{background:linear-gradient(180deg,#0ea5e9,#0284c7);border-color:transparent}
+    .btn.success{background:linear-gradient(180deg,#22c55e,#16a34a);border-color:transparent}
+    .btn.warning{background:linear-gradient(180deg,#f59e0b,#d97706);border-color:transparent}
+    .btn.ghost{background:transparent;border:1px dashed #334155}
+
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{grid-column:span 12;background:linear-gradient(180deg,rgba(17,24,39,.9),rgba(2,6,23,.9));border:1px solid #1f2937;border-radius:20px;padding:18px;box-shadow:0 8px 24px #0008}
+    @media(min-width:900px){.span4{grid-column:span 4}.span6{grid-column:span 6}.span8{grid-column:span 8}}
+
+    h2{margin:.2rem 0 0.6rem;font-size:1.25rem}
+    h3{margin:.8rem 0 .4rem}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border-radius:999px;border:1px solid #334155;font-size:.8rem;color:#a7f3d0;background:#052e2e}
+
+    .accordion{border:1px solid #1f2937;border-radius:14px;overflow:hidden}
+    .acc-item+.acc-item{border-top:1px solid #1f2937}
+    .acc-head{width:100%;text-align:left;background:#0b1222;padding:14px;cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+    .acc-body{padding:0 14px;max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .acc-item.open .acc-body{padding:14px;max-height:600px}
+
+    .role{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+    .role .chip{padding:8px 12px;border-radius:999px;border:1px solid #334155;cursor:pointer}
+    .role .chip.active{background:linear-gradient(180deg,#22d3ee,#06b6d4);color:#002b36;border-color:transparent}
+
+    .tip{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid #1f2937;border-radius:14px;background:rgba(2,6,23,.6)}
+
+    /* Fancy animated buttons */
+    .sparkle{position:relative;overflow:hidden}
+    .sparkle::after{content:"";position:absolute;inset:auto -120% -120% -120%;height:300%;background:conic-gradient(from 0deg at 50% 50%, transparent 10%, #22d3ee55, transparent 30%, #34d39955, transparent 60%, #60a5fa55, transparent 90%);
+      animation:spin 3s linear infinite;filter:blur(8px)}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Floating emoji images */
+    .floaty{display:inline-block;animation:float 4s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+    /* Timer ring */
+    .ring{width:120px;height:120px;border-radius:999px;border:8px solid #1f2937;position:relative;display:grid;place-items:center}
+    .ring > .progress{position:absolute;inset:0;border-radius:999px;mask:radial-gradient(circle 52px at center, transparent 50px, black 52px);background:conic-gradient(var(--ring) var(--deg,0deg), #1f2937 0)}
+    .ring .time{font-weight:700}
+
+    /* Table */
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px}
+    th,td{padding:10px;border-bottom:1px solid #1f2937}
+    th{background:#0b1222;text-align:left}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;z-index:60}
+    .modal .box{background:#0b1222;border:1px solid #1f2937;border-radius:18px;padding:18px;max-width:560px;width:min(92%,560px)}
+
+    /* Toast */
+    #toast{position:fixed;bottom:16px;right:16px;background:#0b1222;border:1px solid #1f2937;padding:12px 14px;border-radius:12px;display:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="muted">Universal 4-Speaker Team Format • Generated on Aug 20, 2025</div>
+     <div><strong style="color:#22d3ee">Created by Ananta Narayan Ganguly</strong></div>
+      <div class="container">
+       <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l2.8 5.7L21 9l-4.5 4.4L17 21l-5-2.7L7 21l.5-7.6L3 9l6.2-1.3L12 2z" fill="#fff"/>
+          </svg>
+        </div>
+        <div>
+          <div class="title">School Debate — Tips & Tricks</div>
+          <div class="muted">Universal 4‑Speaker Team Format • Made on Aug 20, 2025</div>
+        </div>
+      </div>
+      <nav>
+        <button class="btn sparkle" data-scroll="#roles">Roles</button>
+        <button class="btn sparkle" data-scroll="#structure">Structure</button>
+        <button class="btn sparkle" data-scroll="#strategies">Strategies</button>
+        <button class="btn sparkle" data-scroll="#timers">Timer</button>
+        <button class="btn sparkle" data-scroll="#practice">Practice</button>
+        <button class="btn sparkle" data-scroll="#quiz">Quiz</button>
+        <button class="btn ghost" id="darkToggle">Toggle Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container grid" style="margin-top:10px">
+    <section id="hero" class="card span12" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+      <div style="flex:1 1 420px;min-width:280px">
+        <h2>Win your next debate with smart prep <span class="floaty">🧠</span> and smooth delivery <span class="floaty">🎤</span></h2>
+        <p class="muted">This mini‑site is designed for the common 4‑speaker team format: <strong>Opener</strong>, <strong>Point‑1</strong>, <strong>Point‑2</strong>, and <strong>Closer</strong> on each side. Use the role chips, checklists, and timer to rehearse like a pro.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn primary" id="randomTip">Give me a random pro‑tip ✨</button>
+          <button class="btn success" id="openChecklist">Open pre‑round checklist ✅</button>
+        </div>
+      </div>
+      <div aria-hidden="true" style="flex:1 1 320px;min-width:240px;display:grid;place-items:center">
+        <!-- Simple decorative SVG -->
+        <svg viewBox="0 0 320 220" width="100%" style="max-width:360px">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0%" stop-color="#22d3ee"/>
+              <stop offset="100%" stop-color="#60a5fa"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="320" height="220" rx="18" fill="#0b1222" stroke="#1f2937"/>
+          <g>
+            <circle cx="70" cy="160" r="46" fill="url(#g1)" opacity=".35"/>
+            <circle cx="150" cy="90" r="30" fill="url(#g1)" opacity=".45"/>
+            <circle cx="240" cy="140" r="56" fill="url(#g1)" opacity=".35"/>
+          </g>
+          <text x="24" y="40" fill="#e5e7eb" font-size="18" font-weight="700">Debate Flow</text>
+          <g fill="#cbd5e1" font-size="12">
+            <text x="24" y="70">1. Motion &amp; case theory</text>
+            <text x="24" y="90">2. Definitions &amp; burdens</text>
+            <text x="24" y="110">3. Arguments &amp; evidence</text>
+            <text x="24" y="130">4. Refutations</text>
+            <text x="24" y="150">5. Weighing &amp; impact</text>
+            <text x="24" y="170">6. Summary &amp; voters</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section id="roles" class="card span12">
+      <h2>Pick your role</h2>
+      <div class="role">
+        <div class="chip" data-role="opener">Opener 🚀</div>
+        <div class="chip" data-role="point1">Points & Facts 1 📚</div>
+        <div class="chip" data-role="point2">Points & Facts 2 🔬</div>
+        <div class="chip" data-role="closer">Closer 🎯</div>
+      </div>
+      <div class="grid">
+        <div class="span6">
+          <div class="accordion">
+            <div class="acc-item" data-for="opener">
+              <button class="acc-head">Opener — Objectives <span>＋</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li>Set tone: define terms clearly, state your team line, and map the roadmap.</li>
+                  <li>Frame burdens: explain what each side must prove to win.</li>
+                  <li>Deliver a crisp hook: statistic, short story, or question to the judges.</li>
+                </ul>
+                <div class="tip">💡 <div><strong>Template:</strong> "In today’s debate we support/oppose <em>[motion]</em> because (1) value, (2) practicality, (3) fairness. I’ll define key terms, set burdens, then present Argument‑1."
+                </div></div>
+              </div>
+            </div>
+            <div class="acc-item" data-for="point1">
+              <button class="acc-head">Points & Facts 1 — Responsibilities <span>＋</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li>Deliver the <strong>flagship argument</strong> with evidence and clear impacts.</li>
+                  <li>Use <em>claim → warrant → impact</em> structure; pre‑empt two likely rebuttals.</li>
+                  <li>Signpost and label each point; keep it judge‑friendly.</li>
+                </ul>
+                <div class="tip">📌 <div><strong>Evidence tips:</strong> Prefer recent, relevant, and reputable sources. Explain <em>why</em> your study matters more than theirs (method, sample size, context).</div></div>
+              </div>
+            </div>
+            <div class="acc-item" data-for="point2">
+              <button class="acc-head">Points & Facts 2 — Responsibilities <span>＋</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li>Bring a <strong>different angle</strong>: principles, stakeholders, or feasibility.</li>
+                  <li>Build a quick <em>cost–benefit</em> or <em>comparative</em> weighing.</li>
+                  <li>Protect teammates: patch weak links, extend earlier impacts.</li>
+                </ul>
+                <div class="tip">🧭 <div><strong>Weighing words:</strong> scope, severity, probability, reversibility, timeframe. Use them to show why your side matters more.</div></div>
+              </div>
+            </div>
+            <div class="acc-item" data-for="closer">
+              <button class="acc-head">Closer — Objectives <span>＋</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li>Summarize the <strong>story of the round</strong>, not new arguments.</li>
+                  <li>Group the clash: definitions, harms/benefits, practicality, values.</li>
+                  <li>End with 2–3 <strong>voters</strong> (reasons to win) using judge‑friendly language.</li>
+                </ul>
+                <div class="tip">🎯 <div><strong>Closer line:</strong> "Even if they win X, we still win because Y outweighs on <em>impact and probability</em>."</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="span6">
+          <div class="card" style="background:#0b1222">
+            <h3>Role‑specific delivery checklist</h3>
+            <table>
+              <thead><tr><th>Item</th><th>Why it matters</th></tr></thead>
+              <tbody id="checklistBody"></tbody>
+            </table>
+            <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+              <button class="btn" id="copyChecklist">Copy checklist 📋</button>
+              <button class="btn warning" id="clearChecklist">Clear ticks ⟳</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="structure" class="card span12">
+      <h2>Common 4‑Speaker Team Structure <span class="pill">Universal Basics</span></h2>
+      <div class="grid">
+        <div class="span8">
+          <ol>
+            <li><strong>Opener (4–6 min):</strong> definitions, burdens, roadmap, Argument‑1.</li>
+            <li><strong>Point‑1 (4–6 min):</strong> flagship argument with evidence + weighing.</li>
+            <li><strong>Point‑2 (4–6 min):</strong> second angle, feasibility, comparative.</li>
+            <li><strong>Closer (3–5 min):</strong> collapse, weigh, present voters; no new args.</li>
+          </ol>
+          <p class="muted">Timing varies by tournament; adapt to your rulebook. Keep <em>POIs/POCs</em> respectful and brief where allowed.</p>
+          <div class="tip">🗂️ <div><strong>Flowing tip:</strong> Divide your notes into columns: <em>their case</em>, <em>our answers</em>, <em>what judges should believe</em>. Update after each speech.</div></div>
+        </div>
+        <div class="span4" aria-hidden="true">
+          <div class="card" style="text-align:center">
+            <div class="floaty" style="font-size:48px">🏆</div>
+            <p>Focus on clarity, weighing, and consistency across speakers.</p>
+            <button class="btn success" id="downloadPlan">Download 1‑page prep sheet ⤓</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="strategies" class="card span12">
+      <h2>Core strategies</h2>
+      <div class="grid">
+        <div class="span6">
+          <div class="accordion">
+            <div class="acc-item open">
+              <button class="acc-head">Framing &amp; Definitions <span>−</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li>Give <em>fair</em> definitions. Avoid over‑narrow or abusive framing.</li>
+                  <li>State win conditions: what must be proven for each side.</li>
+                  <li>Offer a simple <strong>theme line</strong> to unify your team.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="acc-item">
+              <button class="acc-head">Argument Building (C‑W‑I) <span>＋</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li><strong>Claim:</strong> your point in one sentence.</li>
+                  <li><strong>Warrant:</strong> logic/evidence that makes the claim true.</li>
+                  <li><strong>Impact:</strong> why it matters to people/judges.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="acc-item">
+              <button class="acc-head">Refutation Toolkit <span>＋</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li><strong>Press:</strong> ask for missing links, definitions, feasibility.</li>
+                  <li><strong>Turn:</strong> show their argument helps your side.</li>
+                  <li><strong>Compare:</strong> use probability, magnitude, timeframe.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="span6">
+          <div class="accordion">
+            <div class="acc-item open">
+              <button class="acc-head">Delivery &amp; Style <span>−</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li>30‑second hooks: story, statistic, or rhetorical question.</li>
+                  <li>Signposting: "First… Second… Therefore…" — help judges flow.</li>
+                  <li>Voice: slower for key claims; pause after impacts.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="acc-item">
+              <button class="acc-head">Team Coordination <span>＋</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li>Shared doc with definitions, evidence links, and voters.</li>
+                  <li>Hand signals for time, speed, and emphasis.</li>
+                  <li>Pre‑agree who answers which expected POIs.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="acc-item">
+              <button class="acc-head">Weighing &amp; Voters <span>＋</span></button>
+              <div class="acc-body">
+                <ul>
+                  <li>Give 2–3 reasons to prefer your side, not 10.</li>
+                  <li>Always explain <em>why judges should care</em>.</li>
+                  <li>End every speech with a crisp one‑line takeaway.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timers" class="card span12">
+      <h2>Practice timer ⏱️</h2>
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+        <div class="ring"><div class="progress"></div><div class="time" id="timeText">00:00</div></div>
+        <div>
+          <label>Minutes: <input id="mins" type="number" min="0" max="20" value="5" style="width:60px"></label>
+          <label>Seconds: <input id="secs" type="number" min="0" max="59" value="0" style="width:60px"></label>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn primary" id="startTimer">Start</button>
+            <button class="btn warning" id="pauseTimer">Pause</button>
+            <button class="btn" id="resetTimer">Reset</button>
+          </div>
+          <p class="muted">Tip: Set Opener 4–6, Point‑1 4–6, Point‑2 4–6, Closer 3–5 minutes as your practice targets.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="practice" class="card span12">
+      <h2>Drills &amp; practice</h2>
+      <div class="grid">
+        <div class="span6">
+          <h3>30‑Second Hook Generator</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input id="topic" placeholder="Type your motion/topic…" style="flex:1;min-width:220px;padding:10px;border-radius:10px;border:1px solid #334155;background:#0b1222;color:var(--text)">
+            <button class="btn success" id="makeHook">Make a hook</button>
+          </div>
+          <div id="hookOut" class="tip" style="margin-top:10px;display:none">💬 <div></div></div>
+        </div>
+        <div class="span6">
+          <h3>POI Practice</h3>
+          <p class="muted">Click a button to simulate a Point of Information you might receive:</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" data-poi="definition">Your definition seems biased. Why is it fair?</button>
+            <button class="btn" data-poi="evidence">Is your evidence recent and context‑appropriate?</button>
+            <button class="btn" data-poi="feasibility">How will this policy work in practice?</button>
+            <button class="btn" data-poi="impact">Why should judges care compared to our harms?</button>
+          </div>
+          <div id="poiOut" class="tip" style="margin-top:10px;display:none">🎯 <div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="card span12">
+      <h2>Quick quiz</h2>
+      <div id="quizBox"></div>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+        <button class="btn primary" id="checkQuiz">Check answers</button>
+        <button class="btn" id="resetQuiz">Reset</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal: checklist -->
+  <div class="modal" id="checklistModal" role="dialog" aria-modal="true" aria-label="Pre‑round checklist">
+    <div class="box">
+      <h3>Pre‑round checklist ✅</h3>
+      <ul id="preList">
+        <li><label><input type="checkbox"> Definitions & burdens agreed</label></li>
+        <li><label><input type="checkbox"> Team line written in one sentence</label></li>
+        <li><label><input type="checkbox"> 2–3 voters identified</label></li>
+        <li><label><input type="checkbox"> Evidence sources verified</label></li>
+        <li><label><input type="checkbox"> Time signals decided</label></li>
+        <li><label><input type="checkbox"> POIs assigned</label></li>
+      </ul>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn" id="closeModal">Close</button>
+        <button class="btn success" id="saveModal">Save ticks</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script>
+    // Smooth scroll for nav buttons
+    document.querySelectorAll('[data-scroll]').forEach(b=>{
+      b.addEventListener('click',()=>{
+        const el = document.querySelector(b.getAttribute('data-scroll'));
+        if(el) el.scrollIntoView({behavior:'smooth'});
+      })
+    })
+
+    // Accordion behavior
+    document.querySelectorAll('.acc-head').forEach(h=>{
+      h.addEventListener('click',()=>{
+        const item = h.closest('.acc-item');
+        item.classList.toggle('open');
+        h.querySelector('span').textContent = item.classList.contains('open') ? '−' : '＋'
+      })
+    })
+
+    // Role chips & checklist content
+    const roleChips = document.querySelectorAll('.role .chip');
+    const checklistBody = document.getElementById('checklistBody');
+    const CHECKS = {
+      opener:[
+        ['Define key terms clearly','Prevents abusive interpretations and confusion'],
+        ['State team line + roadmap','Gives judges a map to follow your case'],
+        ['Frame burdens of proof','Explains what each side must show to win'],
+        ['Deliver Argument‑1 (C‑W‑I)','Sets up strong foundation for teammates'],
+      ],
+      point1:[
+        ['Flagship argument labeled','Helps judges flow and reference easily'],
+        ['Evidence quality explained','Why this study/source is credible and relevant'],
+        ['Pre‑empt two rebuttals','Shows preparation and protects your case'],
+        ['Impact analysis given','Why this matters in real life for stakeholders'],
+      ],
+      point2:[
+        ['Different angle from P1','Avoids repetition and broadens your case'],
+        ['Feasibility & comparisons','Cost‑benefit or practical alternatives weighed'],
+        ['Patch weak links in P1','Team play: protect earlier arguments'],
+        ['Extend impacts forward','Set up the closer for an easy summary'],
+      ],
+      closer:[
+        ['No new arguments','Keeps speech fair and judge‑friendly'],
+        ['Group the clash areas','Definitions, harms/benefits, practicality, values'],
+        ['Weigh comparatively','Probability × magnitude × timeframe'],
+        ['2–3 voters (reasons to win)','Simple bullets judges can write verbatim'],
+      ]
+    };
+
+    function renderChecklist(role='opener'){
+      checklistBody.innerHTML = '';
+      CHECKS[role].forEach(([a,b])=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td><label><input type="checkbox" class="tick"> ${a}</label></td><td class="muted">${b}</td>`;
+        checklistBody.appendChild(tr);
+      });
+    }
+    renderChecklist('opener');
+    roleChips.forEach(ch=>{
+      ch.addEventListener('click',()=>{
+        roleChips.forEach(c=>c.classList.remove('active'));
+        ch.classList.add('active');
+        renderChecklist(ch.dataset.role);
+      })
+    })
+    roleChips[0].classList.add('active');
+
+    // Copy & clear checklist
+    document.getElementById('copyChecklist').addEventListener('click',()=>{
+      const items=[...document.querySelectorAll('#checklistBody tr')].map(tr=>{
+        const label=tr.querySelector('label').innerText.trim();
+        const why=tr.querySelector('td.muted').innerText.trim();
+        const checked=tr.querySelector('input').checked ? '✔' : '□';
+        return `${checked} ${label} — ${why}`;
+      }).join('\n');
+      navigator.clipboard.writeText(items).then(()=>toast('Checklist copied to clipboard!'));
+    });
+    document.getElementById('clearChecklist').addEventListener('click',()=>{
+      document.querySelectorAll('#checklistBody .tick').forEach(x=>x.checked=false);
+      toast('Checklist cleared.');
+    });
+
+    // Random tip
+    const tips=[
+      'Speak slower than you think you should when delivering impacts.',
+      'Signpost: say "First… Second… Therefore…" so judges can flow easily.',
+      'Compare, don\'t just contradict: explain why your impact matters more.',
+      'One clean theme line beats five messy points.',
+      'End with 2–3 voters judges can write down verbatim.'
+    ];
+    document.getElementById('randomTip').addEventListener('click',()=>{
+      const t=tips[Math.floor(Math.random()*tips.length)];
+      toast('💡 '+t);
+    })
+
+    // Modal checklist save
+    const modal = document.getElementById('checklistModal');
+    document.getElementById('openChecklist').addEventListener('click',()=>{ modal.style.display='flex' });
+    document.getElementById('closeModal').addEventListener('click',()=>{ modal.style.display='none' });
+    document.getElementById('saveModal').addEventListener('click',()=>{
+      const data=[...document.querySelectorAll('#preList input')].map(i=>i.checked?1:0);
+      localStorage.setItem('preRound',JSON.stringify(data));
+      toast('Saved. Your ticks will persist.');
+      modal.style.display='none';
+    });
+    // restore
+    const saved=JSON.parse(localStorage.getItem('preRound')||'null');
+    if(saved){[...document.querySelectorAll('#preList input')].forEach((i,idx)=>i.checked=!!saved[idx])}
+
+    // Toast helper
+    function toast(msg){
+      const t=document.getElementById('toast');
+      t.textContent=msg; t.style.display='block';
+      setTimeout(()=>{t.style.display='none'}, 1800);
+    }
+
+    // Theme toggle
+    document.getElementById('darkToggle').addEventListener('click',()=>{
+      if(document.body.dataset.theme==='light'){
+        document.body.dataset.theme='';
+        document.documentElement.style.setProperty('--bg','#0f172a');
+        document.documentElement.style.setProperty('--text','#e5e7eb');
+      }else{
+        document.body.dataset.theme='light';
+        document.documentElement.style.setProperty('--bg','#f8fafc');
+        document.documentElement.style.setProperty('--text','#0b1222');
+      }
+    })
+
+    // Timer logic with ring progress
+    let timer=null, remaining=0, total=0;
+    const timeText=document.getElementById('timeText');
+    const ring=document.querySelector('.ring .progress');
+    function fmt(s){const m=Math.floor(s/60), ss=(s%60).toString().padStart(2,'0');return `${m.toString().padStart(2,'0')}:${ss}`}
+    function tick(){
+      remaining--; const deg = 360*(1-(remaining/total));
+      ring.style.setProperty('--deg',deg+'deg');
+      timeText.textContent=fmt(Math.max(0,remaining));
+      if(remaining<=0){clearInterval(timer);timer=null;toast('⏰ Time!');}
+    }
+    document.getElementById('startTimer').addEventListener('click',()=>{
+      const mins=parseInt(document.getElementById('mins').value||'0');
+      const secs=parseInt(document.getElementById('secs').value||'0');
+      total = remaining = mins*60+secs;
+      if(total<=0){toast('Set a positive time.');return}
+      clearInterval(timer); tick(); timer=setInterval(tick,1000);
+    });
+    document.getElementById('pauseTimer').addEventListener('click',()=>{ if(timer){clearInterval(timer);timer=null}else if(remaining>0){timer=setInterval(tick,1000)} });
+    document.getElementById('resetTimer').addEventListener('click',()=>{ clearInterval(timer);timer=null;remaining=0;ring.style.setProperty('--deg','0deg');timeText.textContent='00:00' });
+
+    // Hook generator
+    document.getElementById('makeHook').addEventListener('click',()=>{
+      const topic=(document.getElementById('topic').value||'this motion').trim();
+      const hooks=[
+        `Imagine it\'s five years from now and ${topic} has shaped every school in the country. Who wins — the students or the statistics?`,
+        `A simple question about ${topic}: if we\'re wrong, who pays the price first?`,
+        `${topic} isn\'t about ideology — it\'s about consequences. Tonight, we count them.`,
+      ];
+      const h=hooks[Math.floor(Math.random()*hooks.length)];
+      const box=document.getElementById('hookOut');
+      box.style.display='flex';
+      box.querySelector('div').textContent=h;
+    })
+
+    // POI practice outputs
+    const poiAns={
+      definition:'We used fair, commonly accepted definitions and remain open to reasonable clarifications that keep both sides\' burdens intact.',
+      evidence:'Yes. Source recency and method are explained in our warranting; even if older, mechanism validity still applies.',
+      feasibility:'We provide stepwise implementation with stakeholders and safeguards; if they propose risks, our plan mitigates them.',
+      impact:'Weighing on probability and magnitude shows our benefits/harms dominate in the round.'
+    }
+    document.querySelectorAll('[data-poi]').forEach(b=>{
+      b.addEventListener('click',()=>{
+        const key=b.getAttribute('data-poi');
+        const out=document.getElementById('poiOut');
+        out.style.display='flex';
+        out.querySelector('div').textContent=poiAns[key];
+      })
+    })
+
+    // Simple quiz
+    const QUIZ=[
+      {q:'What should the closer avoid?', a:['New arguments','Grouping clash','Weighing voters'], correct:0},
+      {q:'Best structure for an argument?', a:['Impact → Claim → Warrant','Claim → Warrant → Impact','Warrant → Claim → Impact'], correct:1},
+      {q:'What\'s a good reason to prefer one side?', a:['It sounds passionate','It has bigger and more probable impacts','It uses more jargon'], correct:1},
+    ];
+    const qb=document.getElementById('quizBox');
+    function renderQuiz(){
+      qb.innerHTML='';
+      QUIZ.forEach((it,idx)=>{
+        const d=document.createElement('div');
+        d.className='card';
+        d.innerHTML=`<h3>${idx+1}. ${it.q}</h3>`+
+          it.a.map((x,i)=>`<label style="display:block;margin:6px 0"><input type="radio" name="q${idx}" value="${i}"> ${x}</label>`).join('');
+        qb.appendChild(d);
+      })
+    }
+    renderQuiz();
+    document.getElementById('resetQuiz').addEventListener('click',renderQuiz);
+    document.getElementById('checkQuiz').addEventListener('click',()=>{
+      let score=0; QUIZ.forEach((it,idx)=>{const sel=document.querySelector(`input[name=q${idx}]:checked`); if(sel && parseInt(sel.value)==it.correct) score++;});
+      toast(`Score: ${score}/${QUIZ.length}`);
+    })
+
+    // Download prep one‑pager
+    document.getElementById('downloadPlan').addEventListener('click',()=>{
+      const content = [
+        '# Debate Prep — 4‑Speaker Team',
+        '',
+        'Opener: definitions, burdens, roadmap, Arg‑1',
+        'P1: flagship argument (C‑W‑I), evidence, weighing',
+        'P2: new angle, feasibility, protect links, comparisons',
+        'Closer: collapse, weigh, 2–3 voters, no new args',
+        '',
+        'Weighing: probability × magnitude × timeframe',
+        'POIs: stay calm, answer briefly, return to flow',
+      ].join('\n');
+      const blob = new Blob([content], {type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='debate_prep_onepager.txt'; a.click(); URL.revokeObjectURL(url);
+    })
+  </script>
+</body>
+</html>
